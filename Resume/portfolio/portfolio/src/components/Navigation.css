@@ -1,0 +1,87 @@
+.navigation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: rgba(18, 18, 18, 0.8);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.navigation.scrolled {
+    background: rgba(18, 18, 18, 0.95);
+    border-bottom-color: var(--border);
+    box-shadow: var(--shadow);
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.nav-menu {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+}
+
+.nav-menu li {
+    cursor: pointer;
+    color: var(--text-secondary);
+    font-weight: 500;
+    transition: var(--transition);
+    position: relative;
+    padding: 8px 0;
+}
+
+.nav-menu li::after {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    transition: width 0.3s ease;
+    border-radius: 2px;
+}
+
+.nav-menu li:hover {
+    color: var(--primary);
+    transform: translateY(-2px);
+}
+
+.nav-menu li:hover::after {
+    width: 100%;
+}
+
+.nav-menu li:active {
+    transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+    .nav-menu {
+        gap: 16px;
+        font-size: 0.9rem;
+    }
+
+    .nav-logo {
+        font-size: 1.2rem;
+    }
+}

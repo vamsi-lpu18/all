@@ -1,0 +1,6 @@
+@numberproducer_HostAddress = http://localhost:5036
+
+GET {{numberproducer_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

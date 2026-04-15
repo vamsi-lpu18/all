@@ -1,0 +1,222 @@
+.projects {
+  background: var(--bg-primary);
+}
+
+.projects-grid {
+  display: grid;
+  gap: 40px;
+}
+
+/* Project Card - Split Layout */
+.project-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: var(--transition);
+  opacity: 0;
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+.project-card:nth-child(even) {
+  direction: rtl;
+}
+
+.project-card:nth-child(even) > * {
+  direction: ltr;
+}
+
+.project-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.35);
+  border-color: var(--project-color);
+}
+
+/* Image Section */
+.project-image-wrapper {
+  position: relative;
+  overflow: hidden;
+  min-height: 320px;
+}
+
+.project-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.project-card:hover .project-image {
+  transform: scale(1.08);
+}
+
+.project-image-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.6));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  backdrop-filter: blur(4px);
+}
+
+.project-card:hover .project-image-overlay {
+  opacity: 1;
+}
+
+.project-overlay-buttons {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.project-view-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 26px;
+  background: var(--project-color);
+  color: white;
+  text-decoration: none;
+  border-radius: var(--radius);
+  font-weight: 700;
+  font-size: 0.95rem;
+  transition: var(--transition);
+  letter-spacing: 0.02em;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.project-view-btn:hover {
+  transform: scale(1.08);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+}
+
+.project-view-btn.live-btn {
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.project-view-btn.live-btn:hover {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.project-view-btn .icon {
+  width: 18px;
+  height: 18px;
+}
+
+/* Info Section */
+.project-info {
+  padding: 36px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 16px;
+}
+
+.project-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.project-title {
+  font-size: 1.9rem;
+  font-weight: 800;
+  color: var(--project-color);
+  letter-spacing: -0.02em;
+}
+
+.project-subtitle {
+  color: var(--text-secondary);
+  font-size: 1.05rem;
+  font-weight: 500;
+}
+
+.project-date {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text-secondary);
+  padding: 5px 14px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  white-space: nowrap;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Project Highlights */
+.project-highlights {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.highlight-item {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.highlight-bullet {
+  color: var(--project-color);
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 2px;
+  font-size: 1.05rem;
+}
+
+.highlight-item span:last-child {
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
+/* Tech Badges */
+.project-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.tech-badge {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text-primary);
+  padding: 5px 14px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: var(--transition);
+}
+
+.tech-badge:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: var(--project-color);
+  transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 968px) {
+  .project-card {
+    grid-template-columns: 1fr;
+  }
+  .project-card:nth-child(even) {
+    direction: ltr;
+  }
+  .project-image-wrapper {
+    min-height: 220px;
+  }
+  .project-info {
+    padding: 24px;
+  }
+}

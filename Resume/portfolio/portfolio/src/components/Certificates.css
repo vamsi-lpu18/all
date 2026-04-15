@@ -1,0 +1,122 @@
+.certificates {
+  background: var(--bg-primary);
+}
+
+.certificates-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 28px;
+}
+
+.certificate-card {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  transition: var(--transition);
+  opacity: 0;
+  animation: fadeInUp 0.6s ease forwards;
+  position: relative;
+  overflow: hidden;
+}
+
+.certificate-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--cert-color);
+}
+
+.certificate-card:nth-child(1) { animation-delay: 0.1s; }
+.certificate-card:nth-child(2) { animation-delay: 0.3s; }
+
+.certificate-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--cert-color);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.3);
+}
+
+.cert-badge {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.cert-icon {
+  font-size: 2.5rem;
+}
+
+.cert-verified {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--cert-color);
+  font-size: 0.8rem;
+  font-weight: 600;
+  background: rgba(255,255,255,0.05);
+  padding: 6px 12px;
+  border-radius: 20px;
+}
+
+.cert-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+}
+
+.cert-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.cert-platform {
+  color: var(--cert-color);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.cert-dot {
+  color: var(--text-secondary);
+}
+
+.cert-date {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.cert-skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.cert-skill {
+  background: rgba(255,255,255,0.06);
+  color: var(--text-primary);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  border: 1px solid rgba(255,255,255,0.08);
+  transition: var(--transition);
+}
+
+.cert-skill:hover {
+  background: var(--cert-color);
+  color: white;
+  border-color: var(--cert-color);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .certificates-grid {
+    grid-template-columns: 1fr;
+  }
+}

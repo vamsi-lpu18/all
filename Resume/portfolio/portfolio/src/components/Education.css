@@ -1,0 +1,193 @@
+.education {
+  background: var(--bg-secondary);
+}
+
+.education-timeline {
+  position: relative;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.education-timeline::before {
+  content: '';
+  position: absolute;
+  left: 32px;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(180deg, var(--primary), var(--secondary), var(--accent));
+  border-radius: 2px;
+}
+
+.education-item {
+  position: relative;
+  padding-left: 84px;
+  margin-bottom: 40px;
+  opacity: 0;
+  animation: slideInRight 0.6s ease forwards;
+}
+
+.education-item:nth-child(1) { animation-delay: 0.1s; }
+.education-item:nth-child(2) { animation-delay: 0.3s; }
+.education-item:nth-child(3) { animation-delay: 0.5s; }
+
+.education-marker {
+  position: absolute;
+  left: 16px;
+  top: 30px;
+  width: 36px;
+  height: 36px;
+  background: var(--bg-tertiary);
+  border: 3px solid var(--edu-color);
+  border-radius: 50%;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 0 5px var(--bg-secondary);
+}
+
+.edu-icon {
+  font-size: 1rem;
+}
+
+.education-card {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px;
+  transition: var(--transition);
+  overflow: hidden;
+}
+
+.education-card:hover {
+  border-color: var(--edu-color);
+  transform: translateX(8px);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.3);
+}
+
+.education-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 20px;
+}
+
+.edu-info {
+  flex: 1;
+}
+
+.education-degree {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--edu-color);
+  margin-bottom: 4px;
+}
+
+.education-major {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  margin-bottom: 8px;
+}
+
+.education-institution {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.education-location {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+/* Grade Ring */
+.edu-grade-ring {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  flex-shrink: 0;
+}
+
+.grade-ring-svg {
+  transform: rotate(-90deg);
+  width: 80px;
+  height: 80px;
+}
+
+.grade-ring-bg {
+  fill: none;
+  stroke: rgba(255,255,255,0.06);
+  stroke-width: 6;
+}
+
+.grade-ring-fill {
+  fill: none;
+  stroke-width: 6;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.grade-ring-label {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.grade-value {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--edu-color);
+  line-height: 1;
+}
+
+.grade-text {
+  font-size: 0.55rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-top: 2px;
+}
+
+/* Bottom bar */
+.edu-bar-section {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.edu-period {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.edu-progress-bar {
+  flex: 1;
+  height: 6px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.edu-progress-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (max-width: 768px) {
+  .education-card-top {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .edu-grade-ring {
+    align-self: center;
+  }
+}

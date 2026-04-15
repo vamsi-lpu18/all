@@ -1,0 +1,6 @@
+@cor_cubeservice_HostAddress = http://localhost:5248
+
+GET {{cor_cubeservice_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

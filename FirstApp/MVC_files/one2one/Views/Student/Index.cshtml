@@ -1,0 +1,22 @@
+@model IEnumerable<one2one.Models.Student>
+
+<h2>Students</h2>
+
+<a href="/Student/Create">Add Student</a>
+
+<table border="1">
+    <tr>
+        <th>Name</th>
+        <th>City</th>
+        <th>Room</th>
+    </tr>
+
+    @foreach (var s in Model)
+    {
+        <tr>
+            <td>@s.Name</td>
+            <td>@s.City</td>
+            <td>@s.Room?.RoomNumber</td>
+        </tr>
+    }
+</table>

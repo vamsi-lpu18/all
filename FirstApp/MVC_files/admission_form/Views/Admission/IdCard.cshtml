@@ -1,0 +1,267 @@
+@model admission_form.Models.AdmissionModel
+@{
+    Layout = null; // standalone page — no navbar/footer
+    var photoBase64 = Model.ProfileImage != null
+        ? $"data:{Model.ImageContentType};base64,{Convert.ToBase64String(Model.ProfileImage)}"
+        : null;
+    // Read LPU logo as base64 so it works even when printing offline
+    var logoPath = System.IO.Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "lpu.webp");
+    var logoBase64 = System.IO.File.Exists(logoPath)
+        ? "data:image/webp;base64," + Convert.ToBase64String(System.IO.File.ReadAllBytes(logoPath))
+        : null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ID Card — @Model.Name</title>
+    <style>
+        /* ── Reset ── */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        html, body {
+            width: 100%; height: 100%;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #e8eaf6;
+            display: flex; align-items: center; justify-content: center;
+            min-height: 100vh;
+        }
+
+        /* ── Screen: wrapper with print button ── */
+        .page-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+            padding: 32px;
+        }
+
+        .btn-print {
+            background: #3730a3; color: #fff;
+            border: none; border-radius: 8px;
+            padding: 10px 28px; font-size: 15px; font-weight: 600;
+            cursor: pointer; letter-spacing: .4px;
+            box-shadow: 0 2px 8px rgba(55,48,163,.35);
+            transition: background .2s;
+        }
+        .btn-print:hover { background: #312e81; }
+
+        /* ── ID Card ── */
+        .id-card {
+            width: 340px;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(55,48,163,.25), 0 1px 4px rgba(0,0,0,.15);
+            background: #fff;
+            font-size: 13px;
+        }
+
+        /* Header band */
+        .card-header {
+            background: linear-gradient(135deg, #3730a3 0%, #6366f1 100%);
+            padding: 16px 20px 14px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .card-header img.logo {
+            width: 48px; height: 48px;
+            object-fit: contain;
+            background: #fff;
+            border-radius: 8px;
+            padding: 3px;
+        }
+        .card-header .uni-info { color: #fff; }
+        .card-header .uni-name {
+            font-size: 13px; font-weight: 700; line-height: 1.2;
+            letter-spacing: .3px;
+        }
+        .card-header .uni-sub {
+            font-size: 10px; opacity: .85; margin-top: 2px;
+        }
+
+        /* Photo + details body */
+        .card-body {
+            display: flex;
+            gap: 16px;
+            padding: 18px 20px 14px;
+            align-items: flex-start;
+        }
+        .photo-wrap {
+            flex-shrink: 0;
+            width: 80px; height: 80px;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 3px solid #e0e7ff;
+            background: #f0f4ff;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .photo-wrap img { width: 100%; height: 100%; object-fit: cover; }
+        .photo-placeholder {
+            width: 100%; height: 100%;
+            display: flex; align-items: center; justify-content: center;
+            background: #e0e7ff;
+        }
+        .photo-placeholder svg { width: 36px; height: 36px; color: #6366f1; }
+
+        .details { flex: 1; }
+        .student-name {
+            font-size: 15px; font-weight: 700;
+            color: #1e1b4b; margin-bottom: 8px;
+            line-height: 1.2;
+        }
+        .detail-row {
+            display: flex; gap: 6px;
+            margin-bottom: 5px; align-items: baseline;
+        }
+        .detail-label {
+            font-size: 10px; font-weight: 600; color: #6366f1;
+            text-transform: uppercase; letter-spacing: .5px;
+            min-width: 52px;
+        }
+        .detail-value {
+            font-size: 12px; color: #374151; font-weight: 500;
+        }
+
+        /* ID strip */
+        .card-id-strip {
+            background: #eef2ff;
+            border-top: 1px solid #e0e7ff;
+            padding: 8px 20px;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .card-id-strip .id-label {
+            font-size: 10px; color: #6366f1; font-weight: 700;
+            text-transform: uppercase; letter-spacing: .8px;
+        }
+        .card-id-strip .id-value {
+            font-size: 13px; font-weight: 800; color: #3730a3;
+            font-family: 'Courier New', monospace; letter-spacing: 2px;
+        }
+
+        /* Footer band */
+        .card-footer {
+            background: linear-gradient(135deg, #3730a3 0%, #6366f1 100%);
+            padding: 8px 20px;
+            text-align: center;
+            color: rgba(255,255,255,.8);
+            font-size: 10px;
+            letter-spacing: .4px;
+        }
+
+        /* ── Print styles ── */
+        @@media print {
+            html, body {
+                background: #fff;
+                width: 100%; height: 100%;
+                display: flex; align-items: center; justify-content: center;
+            }
+            .page-wrap { padding: 0; gap: 0; }
+            .btn-print { display: none; }
+            .back-link { display: none; }
+
+            .id-card {
+                box-shadow: none;
+                border: 1px solid #c7d2fe;
+                page-break-inside: avoid;
+            }
+            @@page {
+                size: A6 landscape;
+                margin: 10mm;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-wrap">
+
+        <!-- Print / Back buttons (hidden when printing) -->
+        <div style="display:flex;gap:12px;align-items:center;" class="back-link">
+            <a href="javascript:history.back()"
+               style="color:#6366f1;font-size:14px;font-weight:600;text-decoration:none;">
+                &larr; Back to List
+            </a>
+        </div>
+
+        <!-- ══ ID CARD ══ -->
+        <div class="id-card">
+
+            <!-- Header -->
+            <div class="card-header">
+                @if (logoBase64 != null)
+                {
+                    <img class="logo" src="@logoBase64" alt="LPU Logo" />
+                }
+                <div class="uni-info">
+                    <div class="uni-name">Lovely Professional University</div>
+                    <div class="uni-sub">Phagwara, Punjab — 144411</div>
+                    <div class="uni-sub" style="margin-top:3px;font-size:9px;opacity:.7;letter-spacing:.8px;text-transform:uppercase;">Student Identity Card</div>
+                </div>
+            </div>
+
+            <!-- Body -->
+            <div class="card-body">
+                <!-- Photo -->
+                <div class="photo-wrap">
+                    @if (photoBase64 != null)
+                    {
+                        <img src="@photoBase64" alt="@Model.Name" />
+                    }
+                    else
+                    {
+                        <div class="photo-placeholder">
+                            <svg fill="none" stroke="#6366f1" stroke-width="1.5" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                      d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                            </svg>
+                        </div>
+                    }
+                </div>
+
+                <!-- Details -->
+                <div class="details">
+                    <div class="student-name">@Model.Name</div>
+                    <div class="detail-row">
+                        <span class="detail-label">Age</span>
+                        <span class="detail-value">@(Model.Age?.ToString() ?? "—")</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Phone</span>
+                        <span class="detail-value">@Model.PhoneNumber</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Email</span>
+                        <span class="detail-value" style="word-break:break-all;">@(Model.Email ?? "—")</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ID strip -->
+            <div class="card-id-strip">
+                <span class="id-label">Student ID</span>
+                <span class="id-value">LPU-@Model.Id.ToString("D6")</span>
+            </div>
+
+            <!-- Footer -->
+            <div class="card-footer">
+                If found, please return to LPU Campus Security &bull; helpdesk&#64;lpu.in
+            </div>
+
+        </div>
+        <!-- end .id-card -->
+
+        <button class="btn-print" onclick="window.print()">
+            &#128438; Print / Save as PDF
+        </button>
+
+    </div>
+
+    <script>
+        // Auto-open print dialog when page loads
+        window.addEventListener('load', function () {
+            setTimeout(function () { window.print(); }, 400);
+        });
+    </script>
+</body>
+</html>

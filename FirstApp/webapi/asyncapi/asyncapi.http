@@ -1,0 +1,6 @@
+@asyncapi_HostAddress = http://localhost:5267
+
+GET {{asyncapi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

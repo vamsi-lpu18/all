@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Home - RoadHealth AI{% endblock %}
+{% block content %}
+
+<section class="fade-in mb-12">
+  <div class="rh-shell px-8 py-10 mb-10">
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-8">
+      <div>
+        <p class="rh-badge mb-3 inline-flex items-center gap-2 text-xs text-slate-300">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+          Road condition analytics workspace
+        </p>
+        <h1 class="text-3xl md:text-4xl font-semibold tracking-tight text-slate-50 mb-3">
+          Turn raw road imagery<br class="hidden md:block" />into actionable maintenance plans.
+        </h1>
+        <p class="text-sm md:text-base text-slate-400 max-w-xl">
+          RoadHealth centralizes pavement photos, AI analysis and reporting so your team can
+          prioritize work orders based on real condition data—not guesswork.
+        </p>
+        <div class="flex flex-wrap items-center gap-3 mt-6">
+          <a
+            href="{% url 'dashboard' %}"
+            class="inline-flex items-center gap-2 rounded-full bg-blue-500 px-5 py-2.5 text-sm font-medium text-slate-50 hover:bg-blue-400 transition-colors"
+          >
+            Open dashboard
+            <i class="fas fa-arrow-right text-xs"></i>
+          </a>
+          {% if not user.is_authenticated %}
+          <a
+            href="{% url 'register' %}"
+            class="inline-flex items-center gap-2 rounded-full border border-slate-600/70 bg-slate-900/50 px-4 py-2 text-sm font-medium text-slate-200 hover:bg-slate-800/80 transition-colors"
+          >
+            Create an account
+          </a>
+          {% endif %}
+        </div>
+      </div>
+      <div class="flex-1">
+        <div class="rh-card p-5">
+          <p class="text-xs font-medium text-slate-400 uppercase tracking-[0.16em] mb-3">
+            Example insight
+          </p>
+          <div class="space-y-3 text-xs text-slate-300">
+            <div class="flex items-center justify-between">
+              <span class="text-slate-400">Segment</span>
+              <span class="font-medium text-slate-100">Highway 12 – Eastbound</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="text-slate-400">Condition index</span>
+              <span class="inline-flex items-center gap-2">
+                <span class="font-semibold text-amber-400">52 / 100</span>
+                <span class="h-1.5 w-16 overflow-hidden rounded-full bg-slate-800">
+                  <span class="block h-full w-[52%] rounded-full bg-gradient-to-r from-amber-400 to-orange-500"></span>
+                </span>
+              </span>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="text-slate-400">Critical defects</span>
+              <span class="font-medium text-rose-300">Longitudinal cracking, potholes</span>
+            </div>
+            <div class="pt-3 mt-2 border-t border-slate-800">
+              <p class="text-xs text-slate-400">
+                Recommended: schedule targeted patching in the next maintenance window to avoid
+                accelerated surface failure.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div class="rh-card-muted p-6">
+      <p class="text-xs font-semibold text-slate-400 tracking-[0.16em] uppercase mb-3">
+        1 · Capture
+      </p>
+      <h3 class="text-sm font-semibold text-slate-50 mb-2">Upload your road imagery</h3>
+      <p class="text-xs text-slate-400">
+        Drag-and-drop individual images or import from existing inspections. RoadHealth AI keeps
+        everything organized by project and location.
+      </p>
+    </div>
+    <div class="rh-card-muted p-6">
+      <p class="text-xs font-semibold text-slate-400 tracking-[0.16em] uppercase mb-3">
+        2 · Analyse
+      </p>
+      <h3 class="text-sm font-semibold text-slate-50 mb-2">Objective AI assessment</h3>
+      <p class="text-xs text-slate-400">
+        Our model scores severity and classifies defects consistently across your network, so you
+        can compare segments with confidence.
+      </p>
+    </div>
+    <div class="rh-card-muted p-6">
+      <p class="text-xs font-semibold text-slate-400 tracking-[0.16em] uppercase mb-3">
+        3 · Act
+      </p>
+      <h3 class="text-sm font-semibold text-slate-50 mb-2">Prioritize and report</h3>
+      <p class="text-xs text-slate-400">
+        Export reports for stakeholders, share map views with field teams, and plan work orders
+        based on the highest risk sections.
+      </p>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

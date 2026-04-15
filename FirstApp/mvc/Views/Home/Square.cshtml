@@ -1,0 +1,23 @@
+@model int?
+
+<h2>Square Calculator</h2>
+
+@if (Model.HasValue)
+{
+    <p>Number: @Model.Value</p>
+    <p>Square: @(Model.Value * Model.Value)</p>
+    
+    @if (Model.Value % 2 == 0)
+    {
+        <p>Even number</p>
+    }
+    else
+    {
+        <p>Odd number</p>
+    }
+}
+else
+{
+    <p>Please provide a number in the URL: /Home/Square?number=5</p>
+}
+

@@ -1,0 +1,23 @@
+@model IEnumerable<demo.Models.Student>
+
+<h2>Students List</h2>
+    <table border="1" cellpadding="8" style="backgroundcolor":"blue">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Course</th>
+            <th>Age Square</th>
+        </tr>
+
+        @foreach (var s in Model)
+        {
+            <tr>
+                <td>@s.Id</td>
+                <td>@s.Name</td>
+                <td>@s.Age</td>
+                <td>@s.Course</td>
+                <td>@s.AgeSquare</td>
+            </tr>
+        }
+

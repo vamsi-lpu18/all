@@ -1,0 +1,6 @@
+@cor_squareservice_HostAddress = http://localhost:5190
+
+GET {{cor_squareservice_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

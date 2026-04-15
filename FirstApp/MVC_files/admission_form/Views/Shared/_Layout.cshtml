@@ -1,0 +1,106 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@(ViewData["Title"] != null ? ViewData["Title"] + " — AdmissionPortal" : "AdmissionPortal")</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'ui-sans-serif', 'system-ui'] },
+                    colors: {
+                        brand: { 50:'#eef2ff', 100:'#e0e7ff', 500:'#6366f1', 600:'#4f46e5', 700:'#4338ca', 800:'#3730a3' }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        /* Dark gray transparent overlay over the whole page */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: rgba(30, 30, 40, 0.55);
+            z-index: 0;
+            pointer-events: none;
+        }
+        header, main, footer { position: relative; z-index: 1; }
+        /* Glassmorphism card */
+        .glass {
+            background: rgba(200, 200, 215, 0.18);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid rgba(255,255,255,0.22);
+        }
+        .nav-link { position: relative; padding-bottom: 2px; }
+        .nav-link::after { content:''; position:absolute; left:0; bottom:0; width:0; height:2px; background:#a5b4fc; transition:width .25s; }
+        .nav-link:hover::after { width:100%; }
+        .field-error { display:none; color:#fca5a5; font-size:.8rem; margin-top:.25rem; }
+        .field-error.show { display:block; }
+        input.invalid { border-color:#f87171 !important; }
+        /* Inputs inside glass cards */
+        .glass input, .glass select {
+            background: rgba(255,255,255,0.15);
+            color: #f1f5f9;
+            border-color: rgba(255,255,255,0.25);
+        }
+        .glass input::placeholder { color: rgba(203,213,225,0.6); }
+        .glass input:focus, .glass select:focus {
+            background: rgba(255,255,255,0.22);
+            outline: none;
+            border-color: #818cf8;
+            box-shadow: 0 0 0 2px rgba(99,102,241,0.35);
+        }
+        .glass label { color: #e2e8f0; }
+        .file-upload-area {
+            border: 2px dashed rgba(165,180,252,0.5);
+            background: rgba(255,255,255,0.08);
+            cursor: pointer;
+            transition: border-color .2s, background .2s;
+        }
+        .file-upload-area:hover, .file-upload-area.drag-over {
+            border-color: #818cf8;
+            background: rgba(255,255,255,0.14);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col" style="background-image:url('/pic2.jpg'); background-size:cover; background-position:center; background-repeat:no-repeat; background-attachment:fixed;">
+
+    <!-- Navbar -->
+    <header class="sticky top-0 z-50 shadow-lg" style="background:rgba(55,48,163,0.55);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,0.1);">
+        <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+            <a asp-controller="Admission" asp-action="Index" class="flex items-center gap-2 text-white font-bold text-lg tracking-tight">
+                <img src="/lpu.webp" alt="LPU" class="w-9 h-9 object-contain rounded-md bg-white p-0.5" />
+                <span class="hidden sm:inline">AdmissionPortal</span>
+                <span class="text-indigo-300 hidden sm:inline text-xs font-medium ml-1">| LPU</span>
+            </a>
+            <nav class="flex items-center gap-8">
+                <a asp-controller="Admission" asp-action="Index" class="nav-link text-indigo-200 hover:text-white text-sm font-medium transition-colors">New Admission</a>
+                <a asp-controller="Admission" asp-action="List" class="nav-link text-indigo-200 hover:text-white text-sm font-medium transition-colors">All Students</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page body -->
+    <main class="flex-1 max-w-6xl mx-auto w-full px-6 py-10">
+        @RenderBody()
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-indigo-200 text-sm text-center py-5 mt-auto" style="background:rgba(30,27,75,0.55);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-top:1px solid rgba(255,255,255,0.08);">
+        &copy; 2026 AdmissionPortal &mdash;
+        <a asp-controller="Home" asp-action="Privacy" class="hover:text-white underline ml-1">Privacy Policy</a>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
