@@ -1,0 +1,1 @@
+var age:number|null=50;

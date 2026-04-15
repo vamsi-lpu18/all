@@ -1,0 +1,58 @@
+[{
+  "id": "root",
+  "name": "My Files",
+  "type": "folder",
+  "expanded": true,
+  "children": [
+    {
+      "id": "docs",
+      "name": "Documents",
+      "type": "folder",
+      "expanded": true,
+      "children": [
+        {
+          "id": "cv_pdf",
+          "name": "Vamsi_K_CV.pdf",
+          "type": "file",
+          "size": 284112,
+          "modified": "2025-08-29 16:40:24",
+          "mime": "application/pdf"
+        },
+        {
+          "id": "proj_report",
+          "name": "FashionBlog_Project_Report.docx",
+          "type": "file",
+          "size": 1454312,
+          "modified": "2025-08-22 11:40:24",
+          "mime": "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+        }
+      ],
+      "modified": "2025-08-31 16:40:24"
+    },
+    {
+      "id": "media",
+      "name": "Media",
+      "type": "folder",
+      "children": [
+        {
+          "id": "img1",
+          "name": "profile.png",
+          "type": "file",
+          "size": 154222,
+          "modified": "2025-08-02 16:40:24",
+          "mime": "image/png"
+        },
+        {
+          "id": "banner",
+          "name": "banner.jpg",
+          "type": "file",
+          "size": 982331,
+          "modified": "2025-08-20 16:40:24",
+          "mime": "image/jpeg"
+        }
+      ],
+      "modified": "2025-08-20 16:40:24"
+    }
+  ],
+  "modified": "2025-09-01 16:40:24"
+}]

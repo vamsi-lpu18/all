@@ -1,0 +1,1 @@
+ReadOnlySpan<byte> httpGet = "GET"u8;

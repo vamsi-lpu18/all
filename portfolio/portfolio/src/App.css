@@ -1,0 +1,87 @@
+.animate-fade-in {
+  animation: fadeIn 0.8s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.project-card {
+  box-shadow: 0 4px 24px 0 rgba(60, 60, 120, 0.15);
+  border: 2px solid #3b82f6;
+  transition: box-shadow 0.3s, border-color 0.3s;
+}
+.project-card:hover {
+  box-shadow: 0 8px 32px 0 rgba(60, 60, 120, 0.25);
+  border-color: #6366f1;
+}
+
+.skills-card {
+  box-shadow: 0 2px 12px 0 rgba(60, 60, 120, 0.10);
+  border: 2px solid #6366f1;
+  transition: box-shadow 0.3s, border-color 0.3s;
+}
+.skills-card:hover {
+  box-shadow: 0 4px 24px 0 rgba(60, 60, 120, 0.18);
+  border-color: #3b82f6;
+}
+/* CV Section Styles */
+.animate-fade-in {
+  animation: fadeIn 0.8s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.animate-glow {
+  box-shadow: 0 0 16px 2px #6366f1, 0 0 8px 1px #3b82f6;
+  transition: box-shadow 0.3s;
+}
+.animate-glow:hover {
+  box-shadow: 0 0 32px 4px #6366f1, 0 0 16px 2px #3b82f6;
+}
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}

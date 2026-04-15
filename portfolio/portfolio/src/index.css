@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+@tailwind components;
+@tailwind utilities;
+
+html, body {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #18181b 0%, #23272f 100%);
+  color: #fff;
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+  transition: background 0.3s;
+  overflow-x: hidden;
+  cursor: pointer, auto;
+}
+
+a, button, .pointer {
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="32" width="32"><text y="24" font-size="24">✨</text></svg>') 0 0, pointer;
+}
+
+body {
+  min-height: 100vh;
+  background: none;
+}
+
+section {
+  border-radius: 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 32px rgba(0,0,0,0.12);
+}
+
+section:last-of-type {
+  margin-bottom: 0;
+}
+
+img {
+  border-radius: 0.5rem;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  background: #23272f;
+}
+::-webkit-scrollbar-thumb {
+  background: #444;
+  border-radius: 4px;
+}
+
+/* Enhanced Animation Utilities */
+@keyframes float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-18px) scale(1.05); filter: brightness(1.2); }
+  100% { transform: translateY(0); }
+}
+
+.animate-float {
+  animation: float 2.5s ease-in-out infinite;
+}
+
+@keyframes bounce-in {
+  0% { transform: scale(0.7); opacity: 0; }
+  60% { transform: scale(1.1); opacity: 1; }
+  100% { transform: scale(1); }
+}
+
+.animate-bounce-in {
+  animation: bounce-in 0.8s cubic-bezier(0.68,-0.55,0.27,1.55) both;
+}
+
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 24px 8px #6366f1, 0 0 0 0 #a21caf; }
+  50% { box-shadow: 0 0 48px 16px #a21caf, 0 0 16px 4px #6366f1; }
+}
+
+.animate-glow {
+  animation: glow 2s ease-in-out infinite;
+}
+
+@layer components {
+  .nav-link {
+    @apply text-gray-300 hover:text-white transition-colors duration-200;
+  }
+
+  .btn {
+    @apply px-6 py-2 rounded-md font-medium transition-colors duration-200;
+  }
+
+  .btn-primary {
+    @apply bg-blue-500 text-white hover:bg-blue-600;
+  }
+
+  .btn-secondary {
+    @apply bg-gray-800 text-white hover:bg-gray-700;
+  }
+}
